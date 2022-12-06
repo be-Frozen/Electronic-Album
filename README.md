@@ -66,7 +66,7 @@ Members: Guodong Chen, Dongyang Cheng, Chao Fei, Yue Yu, Meihan Zhang, Su Diao
 
 ### 要求
 
-给出所开发的电子相册系统的Demo，能实现用户UI交互和照片的上传、下载功能等。
+给出所开发的电子相册系统的Demo，能实现用户UI交互和照片的上传、下载功能、相册的浏览功能等。
 
 ### 答辩时间：2022-12-06
 
