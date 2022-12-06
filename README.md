@@ -36,7 +36,7 @@ Members: Guodong Chen, Dongyang Cheng, Chao Fei, Yue Yu, Meihan Zhang, Su Diao
 
 4. 非功能需求：对该电子相册系统的非功能需求进行分析，并给出相应的描述。
 
-### 答辩时间：2022-11-2
+### 答辩时间：2022-11-02
 
 ### 得分：85
 
