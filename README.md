@@ -38,7 +38,7 @@ Members: Guodong Chen, Dongyang Cheng, Chao Fei, Yue Yu, Meihan Zhang, Su Diao
 
 ## Course Work 2: Object-oriented Design
 
-面向对象分析
+面向对象分析 
 
 ### 答辩时间：
 
