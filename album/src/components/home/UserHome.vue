@@ -170,6 +170,23 @@ export default {
 
         albumxmlhttp.send();
 
+        phpaddr = "album/php/getHead.php";
+        var headxmlhttp;
+        headxmlhttp = new XMLHttpRequest();
+        headxmlhttp.onreadystatechange = function () {
+            if (headxmlhttp.readyState == 4 && headxmlhttp.status == 200) {
+                var x=JSON.parse(headxmlhttp.responseText);
+                Storage.commit("getHeadInfo", x);
+                console.log(x);
+                //console.log(Storage.state.album_info);
+                //console.log(Storage.state.album_info);
+                //console.log(Storage.state.album_info[0]);
+                //console.log(Storage.state.album_info[0]['a_name']);
+            }
+        }
+        headxmlhttp.open("GET", '/myApi' + phpaddr, true);
+        headxmlhttp.send();
+
 
         var photoxmlhttp = [];
         for (var i = 0; i < Storage.state.album_info.length; i++) {
@@ -197,6 +214,20 @@ export default {
             photoxmlhttp[i].send();
 
         }
+
+        phpaddr = "album/php/getShare.php";
+        var sharexmlhttp;
+        sharexmlhttp = new XMLHttpRequest();
+        sharexmlhttp.onreadystatechange = function () {
+            if (sharexmlhttp.readyState == 4 && sharexmlhttp.status == 200) {
+                var x=JSON.parse(sharexmlhttp.responseText);
+                Storage.commit("getShareInfo", x);
+                //console.log(x);
+            }
+        }
+        sharexmlhttp.open("GET", '/myApi' + phpaddr+"?name="+Storage.state.userName, true);
+
+        sharexmlhttp.send();
     },
     /*created() {
         console.log(Storage.state.album_info.length);
@@ -217,7 +248,7 @@ export default {
                 }
             }
             console.log(Storage.state.album_info[i]);
-            xmlhttp[i].open("GET", '/myApi' + phpaddr + '?readall=0&type=1&addr=原神/' + Storage.state.album_info[i], true);
+            xmlhttp[i].open("GET", '/' + phpaddr + '?readall=0&type=1&addr=原神/' + Storage.state.album_info[i], true);
 
             xmlhttp[i].send();
 

@@ -3,8 +3,6 @@
         <!-- button -->
         <div class="content-row" style="height: 10%">
             <el-container>
-                <el-button type="primary" @click="requestData">检索</el-button>
-                <el-button type="primary" @click="clear">显示全部</el-button>
 
                 <!--:headers="upHeaders"-->
                 <el-upload
@@ -23,8 +21,6 @@
                     :on-error="handleError">
                     <el-button type="success">新增照片</el-button>
                 </el-upload>
-
-                    <el-button style="color: white" color="darkorange" type="success" @click="addGood">发朋友圈</el-button>
                 <el-button type="danger" @click="backmain">返回主页</el-button>
                 <el-radio-group @change="changeOrder" v-model="order" class="album_order">
                     <el-radio label="0" size="large">按上传时间降序</el-radio>
@@ -44,7 +40,7 @@
                 <div v-for="(pic,picindex) in item" class="column">
                     <!--<img decoding="async" :src="'http://localhost/album/原神/'+albumname+'/'+pic" style="width:100%"
                          @click="openModal(index*4+picindex);" class="hover-shadow cursor">-->
-                    <img decoding="async" :src="'http://localhost/album/照片/'+username+'/'+$route.params.type+'/'+pic['p_address']" style="width:100%"
+                    <img decoding="async" :src="'/myApi'+'album/照片/'+username+'/'+$route.params.type+'/'+pic['p_address']" style="width:100%"
                          @click="openModal(index*4+picindex);" class="hover-shadow cursor">
                     <h3>{{photoname[index*4+picindex]}}<button @click="deletePhoto(index*4+picindex)" class="deletephoto">×</button></h3>
                     <div style="height: 20px"></div>
@@ -59,7 +55,7 @@
                         <div class="numbertext">{{pic_index+1}}/{{photolist.length}}</div>
                         <!--<div class="close" @click="closeModal">×</div>-->
                         <div class="close" @click="closeModal">×</div>
-                        <img ref="imgDiv" class="img" @mousedown="move" decoding="async" :src="'http://localhost/album/照片/'+username+'/'+$route.params.type+'/'+nowphoto['p_address']">
+                        <img ref="imgDiv" class="img" @mousedown="move" decoding="async" :src="'/myApi'+'album/照片/'+username+'/'+$route.params.type+'/'+nowphoto['p_address']">
                     </div>
 
 
@@ -268,7 +264,6 @@ img.hover-shadow {
 
 <script>
 
-import Mock from '../../mock/Mock'
 import axios from "axios";
 import $ from 'jquery/src/jquery'
 import Storage from "@/tools/Storage";
@@ -277,7 +272,7 @@ export default {
     data() {
         return {
             nowphoto:"",
-            //myApi:'/myApi'+'album/temp',
+            //:'/'+'album/temp',
             myApi:'/myApi'+'album/php/uploadPhoto.php',
             firstphoto:Storage.state.firstphoto,
             firstphotoarr:[],
@@ -445,7 +440,7 @@ export default {
         /*//let phpaddr="index.php";
         axios
             //.post('http://localhost/album/php/outdir.php')
-            .get('/myApi'+phpaddr)
+            .get('/'+phpaddr)
             .then(response => (console.log(response.data)))
             .catch(function (error) { // 请求失败处理
                 console.log(error);
@@ -703,13 +698,7 @@ export default {
 
         },
 
-        // 获取数据的方法
-        requestData() {var x=document.getElementsByClassName("show");
-            console.log(x[0].style);
-            //console.log(this.photolist);
-            console.log(Storage.state.album_info);
 
-        },
         openModal(index) {
 
             document.getElementById('myModal').style.display = "block";

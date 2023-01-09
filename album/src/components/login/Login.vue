@@ -46,6 +46,10 @@
                     </div>
                     <!--<button @keyup.enter="login" @click="login" :disabled="disabled">登录</button>-->
                     <button @click="login">登录</button>
+                    <el-container>
+                        <el-checkbox v-model="admin"></el-checkbox>
+                        <h5 style="margin-top: 8px; margin-left: 7px; color:white;float:left;">以管理员身份登录</h5>
+                    </el-container>
                 </div>
             </div>
             <div class="con-box left">
@@ -82,6 +86,7 @@ export default {
             name: "",   //用户名
             password: "",   //密码
             password2:"",   //确认密码
+            admin:false,
 
         }
     },
@@ -133,6 +138,59 @@ export default {
                 return;
             }
 
+            if(this.admin){
+                let adminphpaddr = "album/php/adminlogin.php";
+                var adminxmlhttp;
+                adminxmlhttp = new XMLHttpRequest();
+                adminxmlhttp.success=false;
+                adminxmlhttp.onreadystatechange = function () {
+                    if (adminxmlhttp.readyState === 4 && adminxmlhttp.status === 200) {
+                        var x=adminxmlhttp.responseText;
+                        adminxmlhttp.success=x=="true"?true:false;
+                        //console.log(x);
+                    }
+                }
+                //xmlhttp.open("GET", '/' + phpaddr + '?name='+this.name+'&password=', false);
+                adminxmlhttp.open("GET", '/myApi' + adminphpaddr + '?name='+this.name+'&password=', false);
+                adminxmlhttp.send();
+                if(!adminxmlhttp.success) {
+                    ElMessage({
+                        message: '管理员账号不存在',
+                        type: 'error',
+                        duration: 1500
+                    })
+                    return;
+                }
+
+                //xmlhttp.open("GET", '/' + phpaddr + '?name='+this.name+'&password='+this.password, false);
+                adminxmlhttp.open("GET", '/myApi' + adminphpaddr + '?name='+this.name+'&password='+this.password, false);
+                adminxmlhttp.send();
+
+                if(adminxmlhttp.success) {
+                    Storage.commit("registUserInfo", {
+                        name: this.name,
+                        password: this.password
+                    })
+                    ElMessage({
+                        message: '登录成功',
+                        type: 'success',
+                        duration: 1500
+                    })
+                    setTimeout(() => {
+                        this.$router.push({name: "adminhome"})
+                    }, 1500);
+                    return;
+                }
+                else{
+                    ElMessage({
+                        message: '密码错误，请重新输入',
+                        type: 'error',
+                        duration: 1500
+                    })
+                    return;
+                }
+            }
+
             let phpaddr = "album/php/login.php";
             var xmlhttp;
             var success=false;
@@ -144,6 +202,7 @@ export default {
                     //console.log(x);
                 }
             }
+            //xmlhttp.open("GET", '/' + phpaddr + '?name='+this.name+'&password=', false);
             xmlhttp.open("GET", '/myApi' + phpaddr + '?name='+this.name+'&password=', false);
             xmlhttp.send();
             if(!success) {
@@ -155,6 +214,7 @@ export default {
                 return;
             }
 
+            //xmlhttp.open("GET", '/' + phpaddr + '?name='+this.name+'&password='+this.password, false);
             xmlhttp.open("GET", '/myApi' + phpaddr + '?name='+this.name+'&password='+this.password, false);
             xmlhttp.send();
 
@@ -212,6 +272,7 @@ export default {
                     //console.log(x);
                 }
             }
+            //xmlhttp.open("GET", '/' + phpaddr + '?name='+this.name+'&password=', false);
             xmlhttp.open("GET", '/myApi' + phpaddr + '?name='+this.name+'&password=', false);
             xmlhttp.send();
             if(success) {
@@ -223,6 +284,7 @@ export default {
                 return;
             }
 
+            //xmlhttp.open("GET", '/' + phpaddr + '?name='+this.name+'&password='+this.password, false);
             xmlhttp.open("GET", '/myApi' + phpaddr + '?name='+this.name+'&password='+this.password, false);
             xmlhttp.send();
 
@@ -358,7 +420,6 @@ input {
     font-size: 14px;
     letter-spacing: 2px;
 }
-
 .input {
     float: right;
     width: 70%;

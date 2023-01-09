@@ -18,6 +18,13 @@ const Store = createStore({
             registertime:null,
             filter:'',
             albumshowtype:'显示图片',
+            share_info:[],
+            head_info:[],
+            user_info:[],
+            name:"",
+            photo:[],
+            albumflag:true,
+            photoflag:true,
         }
     },
     getters: {
@@ -32,7 +39,13 @@ const Store = createStore({
         },
         registUserInfo(state,{name, password}) {
             state.userName = name;
-            state.password = password;
+            state.userPassword = password;
+        },
+        getUserInfo(state,userinfo){
+            state.user_info=userinfo;
+        },
+        getName(state,name){
+            state.name=name;
         },
         getAlbumInfo(state,albuminfo){
             state.album_info=albuminfo;
@@ -43,6 +56,12 @@ const Store = createStore({
         getPhotoInfo(state,photo){
             state.photo_info=photo;
             //console.log(photo);
+        },
+        getShareInfo(state,share){
+            state.share_info=share;
+        },
+        getHeadInfo(state,head){
+            state.head_info=head;
         },
         getAlbumName(state,album){
             state.album=album;
@@ -65,6 +84,18 @@ const Store = createStore({
         },
         getUserName(state,name){
             state.userName=name;
+        },
+        getHead(state,head){
+            state.head=head;
+        },
+        getPhoto(state,photo){
+            state.photo=photo;
+        },
+        getAlbumFlag(state,flag){
+            state.albumflag=flag;
+        },
+        getPhotoFlag(state,flag){
+            state.photoflag=flag;
         },
     }
 })

@@ -3,7 +3,6 @@
         <!-- button -->
         <div class="content-row" style="height: 10%">
             <el-container style="vertical-align: middle">
-                <el-button type="success" @click="print">打印</el-button>
                 <el-button type="primary" @click="changeShowType">{{this.$store.state.albumshowtype}}</el-button>
                 <el-button type="success" @click="addAlbum">新增相册</el-button>
                 <el-radio-group @change="changeOrder" v-model="order" class="album_order">
@@ -24,7 +23,7 @@
                 <div v-for="(pic,picindex) in item" class="column" @click="openModal(albumindex*4+picindex);" >
 
                     <h3>{{ pic['a_name'] }}</h3>
-                    <img onerror="this.style.display='none'" alt="该相册没有图片"  decoding="async" :src="'http://localhost/album/照片/'+username+'/'+pic['a_name']+'/'+firstphoto[pic['a_name']]" style="width:100%;color: white;"
+                    <img onerror="this.style.display='none'" alt="该相册没有图片"  decoding="async" :src="'/myApi'+'album/照片/'+username+'/'+pic['a_name']+'/'+firstphoto[pic['a_name']]" style="width:100%;color: white;"
                           class="hover-shadow cursor">
                     <div style="height: 20px"></div>
                 </div>
@@ -388,7 +387,6 @@ img.hover-shadow {
 
 <script>
 
-import Mock from '../../mock/Mock'
 import axios from "axios";
 import $ from 'jquery/src/jquery'
 import Storage from "@/tools/Storage";
@@ -499,79 +497,6 @@ export default {
     // 组件挂载时获取数据
     mounted() {
         this.changeOrder();
-        /*var arr=[],i;
-        //console.log(Storage.state.photolist);
-        var key=Object.keys(Storage.state.photolist);
-        //console.log(Storage.state.photolist);
-        //console.log(key);
-        for(var x of key)
-        {
-            arr[x]=(Storage.state.photolist[x][0]);
-        }
-        //console.log(arr);
-        this.firstphoto=arr;
-
-        arr=[];
-        //console.log(Storage.state.photolist);
-        key=Object.keys(Storage.state.photolist);
-        //console.log(Storage.state.photolist);
-        //console.log(key);
-        for(x of key)
-        {
-            arr[x]=(Storage.state.photolist[x][0]);
-        }
-        console.log(arr);
-        this.firstphoto=arr;*/
-        //this.goodsData = Mock.getGoods(this.$route.params.type);
-
-
-
-        /*for (let i in this.firstphoto) {
-            let o = {};
-            o[i] = this.firstphoto[i];
-            this.firstphotoarr.push(o)
-        }
-        console.log("begin");
-        console.log(this.firstphotoarr);
-        console.log("end");*/
-
-        /*var xmlhttp=[];
-        for(var i=0;i<this.albumList.length;i++)
-        {
-            let phpaddr="album/php/outdir.php";
-
-            xmlhttp[i]=new XMLHttpRequest();
-            xmlhttp[i].album=this.albumList[i];
-            xmlhttp[i].onreadystatechange=function()
-            {
-                if (this.readyState==4 && this.status==200)
-                {
-                    var x=this.album;
-                    Storage.commit("getFirstPhoto",{
-                        album:x,
-                        first_photo:JSON.parse(this.responseText),
-                    })
-                    console.log(this.responseText);
-                }
-            }
-            console.log(this.albumList[i]);
-            xmlhttp[i].open("GET",'/myApi'+phpaddr+'?readall=0&type=1&addr=原神/'+this.albumList[i],true);
-
-            xmlhttp[i].send();
-
-        }*/
-
-
-    },
-    // 路由更新时刷新数据
-    beforeRouteUpdate(to) {
-        //this.goodsData = Mock.getGoods(to.params.type);
-    },
-    beforeUpdate() {
-            //this.update+=1;
-    },
-    updated() {
-        //this.update+=1;
     },
     beforeCreate() {
         this.update+=1;
@@ -592,10 +517,6 @@ export default {
         this.firstphoto=arr;
     },
     methods: {
-        print(){
-            //this.update+=1;
-            console.log(Storage.state.photolist);
-        },
         // 显示图片/列表
         changeShowType() {
             var arr=[],i;
@@ -624,7 +545,6 @@ export default {
             this.showpic=!this.showpic;
             if(Storage.state.albumshowtype==='显示图片') Storage.commit('getAlbumShowType','显示列表');
             else Storage.commit('getAlbumShowType','显示图片')
-            //this.goodsData = Mock.getGoods(this.$route.params.type);
         },
         openModal(index) {
             console.log(index);

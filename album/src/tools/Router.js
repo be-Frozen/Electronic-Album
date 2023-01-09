@@ -7,9 +7,14 @@ import Store from '../tools/Storage'
 import Main from "../components/User/Main";
 import Share from "../components/share/Share";
 import Information from "@/components/User/information";
-
+import userAdmin from "@/components/admin/userAdmin";
+import albumAdmin from "@/components/admin/albumAdmin";
+import photoAdmin from "@/components/admin/photoAdmin";
+import shareAdmin from "@/components/admin/shareAdmin";
 const Router = createRouter({
-    history:createWebHashHistory(),
+    history:createWebHashHistory('/'),
+    //mode:"hash",
+    //base: process.env.BASE_URL,
     routes:[
         {
             path:'/login',
@@ -32,12 +37,12 @@ const Router = createRouter({
                     name:"Share"
                 },
                 {
-                    path:'user/order/:type',// 0是普通订单 1是秒杀订单,
+                    path:'user/order/:type',
                     component:Order,
                     name:"order"
                 },
                 {
-                    path:'user/information',// 0是普通订单 1是秒杀订单,
+                    path:'user/information',
                     component:Information,
                     name:"information"
                 },
@@ -50,12 +55,27 @@ const Router = createRouter({
             name:"adminhome",
             children:[
                 {
-                    path:'order/:type',// 0是普通订单 1是秒杀订单,
-                    component:Order,
-                    name:"Order"
+                    path:'userAdmin/',
+                    component:userAdmin,
+                    name:"useradmin"
+                },
+                {
+                    path:'albumadmin/:user',
+                    component: albumAdmin,
+                    name:"albumadmin"
+                },
+                {
+                    path:'photoadmin/:user/:album',
+                    component: photoAdmin,
+                    name:"photoadmin"
+                },
+                {
+                    path:'shareadmin',
+                    component: shareAdmin,
+                    name:"shareadmin"
                 },
             ],
-            redirect:'/adminhome/order/0'
+            redirect:'/adminhome/useradmin'
         },
 
     ]
@@ -66,6 +86,7 @@ Router.beforeEach((from) => {
     if (isLogin || from.name == 'login') {
         return true;
     } else {
+        console.log("back to login");
         return {name: 'login'}
     }
     

@@ -16,48 +16,10 @@
                 text-color="#fff"
                 active-text-color="#ffd04b"
                 @select="selectItem">
-                <el-sub-menu index="1">
-                    <template #title>
-                        <i class="el-icon-s-order"></i>
-                        <span>订单管理</span>
-                    </template>
-                    <el-menu-item index="/adminhome/order/0">普通订单</el-menu-item>
-                    <el-menu-item index="/adminhome/order/1">秒杀订单</el-menu-item>
-                </el-sub-menu>
-                <el-sub-menu index="2">
-                    <template #title>
-                        <i class="el-icon-s-shop"></i>
-                        <span>商品管理</span>
-                    </template>
-                    <el-menu-item index="/adminhome/goods/0">普通商品</el-menu-item>
-                    <el-menu-item index="/adminhome/goods/1">秒杀商品</el-menu-item>
-                    <el-menu-item index="/adminhome/goods/2">今日推荐</el-menu-item>
-                    <el-menu-item index="/adminhome/category">商品分类</el-menu-item>
-                </el-sub-menu>
-                <el-sub-menu index="3">
-                    <template #title>
-                        <i class="el-icon-s-custom"></i>
-                        <span>店长管理</span>
-                    </template>
-                    <el-menu-item index="/adminhome/ownerlist">店长列表</el-menu-item>
-                    <el-menu-item index="/adminhome/ownerreq">店长申请审批列表</el-menu-item>
-                    <el-menu-item index="/adminhome/ownerorder">店长订单</el-menu-item>
-                </el-sub-menu>
-                <el-sub-menu index="4">
-                    <template #title>
-                        <i class="el-icon-s-ticket"></i>
-                        <span>财务管理</span>
-                    </template>
-                    <el-menu-item index="/adminhome/tradeinfo">交易明细</el-menu-item>
-                    <el-menu-item index="/adminhome/tradelist">财务对账单</el-menu-item>
-                </el-sub-menu>
-                <el-sub-menu index="5">
-                    <template #title>
-                        <i class="el-icon-s-tools"></i>
-                        <span>基础管理</span>
-                    </template>
-                    <el-menu-item index="/adminhome/data">数据统计</el-menu-item>
-                </el-sub-menu>
+                <el-menu-item index="/adminhome/useradmin">用户管理</el-menu-item>
+                <el-menu-item :disabled="this.$store.state.albumflag" :index="'/adminhome/albumadmin/'+this.$store.state.name">相册管理</el-menu-item>
+                <el-menu-item :disabled="this.$store.state.photoflag" :index="'/adminhome/photoadmin/'+this.$store.state.name+'/'+this.$store.state.album">照片管理</el-menu-item>
+                <el-menu-item index="/adminhome/shareadmin">朋友圈管理</el-menu-item>
             </el-menu>
         </el-aside>
         <el-main style="padding:0">
