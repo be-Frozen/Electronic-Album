@@ -58,7 +58,7 @@ Members: Guodong Chen, Dongyang Cheng, Chao Fei, Yue Yu, Meihan Zhang, Su Diao
 
 ### 答辩时间：2022-11-16
 
-### 得分：
+### 得分：90
 
 ## Course Work 3: Demo for Midterm Defense
 
@@ -70,4 +70,13 @@ Members: Guodong Chen, Dongyang Cheng, Chao Fei, Yue Yu, Meihan Zhang, Su Diao
 
 ### 答辩时间：2022-12-06
 
-### 得分：
+### 得分：95
+
+## Final
+期末验收
+
+呈现完整的电子相册系统，通过老师的期末答辩
+
+### 答辩时间：2023-01-09
+
+### 最终评级：A+
